@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+    <link href="{% static 'chat/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'chat/css/all.css' %}" rel="stylesheet">
+    <link href="{% static 'chat/css/style.css' %}" rel="stylesheet">
+</head>
+<body>
+    {% block content %}
+        <h1>Log-in</h1>
+        <p>Please, use the following form to log-in:</p>
+        <form action="." method="post">
+            {{ form.as_p }}
+            {% csrf_token %}
+            <p><input type="submit" value="Log-in"></p>
+        </form>
+    {% endblock %}
+</html>

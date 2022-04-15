@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Chat Room</title>
+    <link href="{% static 'chat/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'chat/css/all.css' %}" rel="stylesheet">
+    <link href="{% static 'chat/css/style.css' %}" rel="stylesheet">
+</head>
+    <body>
+
+        {% if request.user.is_authenticated %}
+            <div class="col-md-4 offset-md-4">
+                <a href="/registers" class="underline-one" style="..."><strong>{{ user.username }}</strong></a>
+            </div>
+            <div class="col-md-4 offset-md-4">
+                <a href="login/" class="underline-one" style="..."><strong>Выйти</strong></a>
+            </div>
+        {% else %}
+            <div class="col-md-4 offset-md-4">
+                <a href="/registers" class="underline-one" style="..."><strong>Регистрация</strong></a>
+            </div>
+            <div class="col-md-4 offset-md-4">
+                <a href="login/" class="underline-one" style="..."><strong>Вход</strong></a>
+            </div>
+        {% endif %}
+     What chat room would you like to enter?<br>
+        <input id="room-name-input" type="text" size="100"><br>
+        <input id="room-name-submit" type="button" value="Enter">
+
+        <script>
+            document.querySelector('#room-name-input').focus();
+            document.querySelector('#room-name-input').onkeyup = function(e) {
+                if (e.keyCode === 13) {  // enter, return
+                    document.querySelector('#room-name-submit').click();
+                }
+            };
+
+            document.querySelector('#room-name-submit').onclick = function(e) {
+                var roomName = document.querySelector('#room-name-input').value;
+                window.location.pathname = '/chat/' + roomName + '/';
+            };
+        </script>
+    </body>
+</html>
